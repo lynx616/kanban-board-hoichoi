@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
+import { MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { API_BASE_URL, request } from "../api/client";
 import { columns } from "../constants/board";
 import { applyEvent, rollbackTasks, sortTasks } from "../utils/tasks";
@@ -20,7 +20,8 @@ export function useBoard() {
   const tasksRef = useRef([]);
   tasksRef.current = tasks;
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
+    useSensor(MouseSensor, { activationConstraint: { distance: 6 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 220, tolerance: 8 } }),
   );
 
   const notify = (message) => {

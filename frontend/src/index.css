@@ -141,7 +141,7 @@ button { cursor: pointer; }
 	.priority-high { @apply bg-[#ffe0dc] text-[#b33e2b]; }
 	.priority-medium { @apply bg-[#fff0a8] text-[#766000]; }
 	.priority-low { @apply bg-[#dce8ff] text-[#31578e]; }
-	.drag-handle { @apply cursor-grab text-ink/35 transition; }
+	.drag-handle { @apply cursor-grab touch-none text-ink/35 transition; -webkit-tap-highlight-color: transparent; }
 	.drag-handle:hover { @apply text-coral; }
 	.drag-handle:active { @apply cursor-grabbing; }
 	.task-title { @apply flex items-start gap-1.5 font-display text-sm font-bold leading-snug; }
@@ -287,10 +287,16 @@ button { cursor: pointer; }
 	.task-card-top { gap: 6px; }
 	.task-description { overflow-wrap: anywhere; }
 	.modal-backdrop { padding: 8px; }
-	.task-modal { max-height: calc(100vh - 16px); padding: 20px 16px; }
-	.modal-title { font-size: 1.35rem; }
+	.task-modal { max-height: calc(100vh - 16px); padding: 16px 14px; }
+	.modal-header { margin-bottom: 16px; }
+	.modal-title { font-size: 1.2rem; }
+	.task-form > * + * { margin-top: 12px; }
 	.form-grid { grid-template-columns: 1fr; }
-	.modal-footer { align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+	.modal-footer { flex-direction: column; align-items: stretch; gap: 12px; }
+	.modal-footer .delete-button { order: 1; align-self: flex-start; }
+	.modal-footer .save-button { order: 2; width: 100%; }
 	.modal-note { order: 3; width: 100%; }
+	.form-control { font-size: 16px; }
+	.drag-handle { padding: 10px; }
 	.toast { left: 16px; right: 16px; top: 16px; text-align: center; }
 }
