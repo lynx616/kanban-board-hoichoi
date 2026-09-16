@@ -14,6 +14,7 @@ The application is intentionally small and dependency-light. Tasks and active us
 - Track active collaborators through the presence API.
 - Apply optimistic updates for editing, deleting, and moving tasks.
 - Roll back failed optimistic mutations and display an error notification.
+- Support multiple users logging in from different browsers for testing collaborative board updates in real time.
 
 ## UI Preview
 
