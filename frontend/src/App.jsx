@@ -254,7 +254,7 @@ export default function App() {
               {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
             </button>
             <button onClick={() => setModal({ task: null })} className="primary-button">
-              <Plus size={18} /> New task
+              <Plus size={18} /> <span className="primary-button-label">New task</span>
             </button>
           </div>
         </header>
