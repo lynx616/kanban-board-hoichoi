@@ -22,12 +22,9 @@ The application is intentionally small and dependency-light. Tasks and active us
 
 <img width="1911" height="913" alt="image" src="https://github.com/user-attachments/assets/e052ab1a-55f0-4310-bfd8-21bafa1eb4ea" />
 
-
-
 ### Light Mode
 
 <img width="1913" height="912" alt="image" src="https://github.com/user-attachments/assets/c3d031fb-46b0-4258-8fd5-9c1bda0f5fbe" />
-
 
 ## Technology
 
@@ -194,7 +191,22 @@ To create a production frontend bundle:
 npm --prefix frontend run build
 ```
 
-### Troubleshooting
+## Deployment
+
+The application is deployed as a separate frontend and backend service:
+
+- **Frontend:** Deployed on **Vercel** using the `frontend` application.
+- **Backend:** Deployed on **Render** as the Node.js API service.
+- **Environment configuration:** The frontend deployment on Vercel is configured with the `VITE_API_URL` environment variable pointing to the deployed Render backend API URL. This allows the production frontend to communicate with the backend instead of the local Vite proxy.
+- **Backend environment:** The Render service is configured with the required runtime environment variables, including the server `PORT` used by the Node.js application.
+- **Live collaboration:** The deployed frontend connects to the Render backend for REST API requests, presence updates, and Server-Sent Events (SSE), enabling real-time updates across multiple browser sessions.
+
+### Production URLs
+
+- **Frontend:** https://kanban-board-hoichoi.vercel.app/
+- **Repository:** https://github.com/lynx616/kanban-board-hoichoi
+
+## Troubleshooting
 
 If Vite logs `http proxy error` or `ECONNREFUSED` for `/api/board`, `/api/presence`, or `/api/events`, the backend is not reachable at the configured API URL. Confirm that:
 
