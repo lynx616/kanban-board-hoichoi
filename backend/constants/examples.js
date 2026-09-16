@@ -1,11 +1,10 @@
 const taskExamples = [
   {
     id: "task-1",
-    title: "Map the onboarding flow",
-    description:
-      "Sketch the first-time user journey and note the moments that need the most clarity.",
+    title: "Build Hoichoi Kanban Board",
+    description: "Design and develop a responsive Kanban board for managing Hoichoi tasks, workflows, and project activities.",
     priority: "high",
-    assignee: "Maya Chen",
+    assignee: "Rudra Karmakar",
     status: "in-progress",
     type: "story",
     position: 0,

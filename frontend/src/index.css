@@ -70,7 +70,12 @@ button { cursor: pointer; }
 	.app-title-mark { @apply text-coral; }
 	.app-subtitle { @apply mt-2 text-sm text-ink/60; }
 	.primary-button { @apply inline-flex items-center justify-center gap-2 rounded-xl bg-ink px-5 py-3 text-sm font-bold text-white shadow-lg shadow-ink/15 transition hover:-translate-y-0.5 hover:bg-coral; }
-	.board-toolbar { @apply mb-4 flex flex-col gap-3 border-y border-ink/10 py-3 sm:flex-row sm:items-center sm:justify-between; }
+	.board-toolbar {
+		@apply mb-4 flex flex-col gap-3 border-y border-ink/10 py-3 sm:flex-row sm:items-center sm:justify-between;
+		padding-left: 12px;
+		padding-right: 12px;
+		box-sizing: border-box;
+	}
 	.toolbar-controls { @apply flex flex-1 flex-col gap-3 sm:flex-row sm:items-center; }
 	.search-field { @apply relative block min-w-0 flex-1 sm:max-w-sm; }
 	.search-icon { @apply absolute left-3 top-2.5 text-ink/40; }
