@@ -15,6 +15,16 @@ The application is intentionally small and dependency-light. Tasks and active us
 - Apply optimistic updates for editing, deleting, and moving tasks.
 - Roll back failed optimistic mutations and display an error notification.
 
+## UI Preview
+
+### Light Mode
+
+![Orbit Kanban - Light Mode](docs/screenshots/kanban-light.png)
+
+### Dark Mode
+
+![Orbit Kanban - Dark Mode](docs/screenshots/kanban-dark.png)
+
 ## Technology
 
 ### Frontend
