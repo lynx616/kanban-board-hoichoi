@@ -244,12 +244,6 @@ export default function App() {
             )}
           </div>
           <div className="topbar-actions">
-            <button className="icon-button" aria-label="Open command menu">
-              <Command size={16} />
-            </button>
-            <button className="icon-button" aria-label="Open board settings">
-              <Settings2 size={16} />
-            </button>
             <button
               type="button"
               onClick={() => setTheme((current) => (current === "dark" ? "light" : "dark"))}
