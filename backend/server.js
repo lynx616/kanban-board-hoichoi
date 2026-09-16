@@ -13,6 +13,16 @@ const eventService = new EventService();
 const presenceService = new PresenceService();
 
 const server = http.createServer(async (request, response) => {
+  response.setHeader("Access-Control-Allow-Origin", process.env.FRONTEND_ORIGIN || "*");
+  response.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS");
+  response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (request.method === "OPTIONS") {
+    response.writeHead(204);
+    response.end();
+    return;
+  }
+
   const url = new URL(request.url, `http://${request.headers.host}`);
   request.url = url.pathname;
 
