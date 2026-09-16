@@ -22,10 +22,13 @@ button { cursor: pointer; }
 
 @media (max-width: 1023px) {
 	.sidebar {
-		display: none;
+		width: min(280px, calc(100vw - 32px));
+		background-color: #f3f5f7;
+		box-shadow: 18px 0 40px rgba(0, 0, 0, 0.18);
 		transform: translateX(-100%);
 		transition: transform 0.2s ease;
 	}
+	.theme-dark .sidebar { background-color: #111315; }
 	.sidebar.mobile-open {
 		display: flex;
 		transform: translateX(0);
@@ -250,4 +253,44 @@ button { cursor: pointer; }
 	.theme-dark .modal-footer { @apply border-white/10; }
 	.theme-dark .modal-note { @apply text-white/40; }
 	.theme-dark .save-button { @apply bg-white text-ink hover:bg-coral hover:text-white; }
+}
+
+@media (max-width: 1023px) {
+	.app-main { padding-left: 0; }
+	.topbar { padding-left: 16px; padding-right: 16px; }
+	.app-container { padding-left: 16px; padding-right: 16px; }
+	.board-grid { gap: 12px; }
+	.kanban-column { flex: 0 0 min(300px, calc(100vw - 48px)); }
+	.task-modal { max-height: calc(100vh - 32px); overflow-y: auto; }
+}
+
+@media (max-width: 767px) {
+	.topbar { gap: 8px; }
+	.topbar-left { min-width: 0; overflow: hidden; }
+	.topbar-actions { flex-shrink: 0; }
+	.workspace-switcher { min-width: 0; }
+	.workspace-switcher > span:last-of-type { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+	.crumb-chevron, .crumb-icon, .topbar-left strong { display: none; }
+	.theme-toggle { height: 36px; width: 36px; }
+	.primary-button { padding: 10px 12px; }
+	.primary-button-label { display: none; }
+	.board-heading { align-items: flex-start; flex-direction: column; padding-top: 20px; }
+	.reference-context { margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px; }
+	.reference-filter-row { overflow-x: auto; }
+	.reference-filter { flex: 0 0 auto; }
+	.board-toolbar { align-items: stretch; margin-left: -4px; margin-right: -4px; padding-left: 4px; padding-right: 4px; }
+	.toolbar-controls { gap: 8px; }
+	.filter-input { width: 100%; }
+	.board-status { justify-content: space-between; }
+	.kanban-column { min-height: 440px; }
+	.task-card { padding: 12px; }
+	.task-card-top { gap: 6px; }
+	.task-description { overflow-wrap: anywhere; }
+	.modal-backdrop { padding: 8px; }
+	.task-modal { max-height: calc(100vh - 16px); padding: 20px 16px; }
+	.modal-title { font-size: 1.35rem; }
+	.form-grid { grid-template-columns: 1fr; }
+	.modal-footer { align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+	.modal-note { order: 3; width: 100%; }
+	.toast { left: 16px; right: 16px; top: 16px; text-align: center; }
 }
