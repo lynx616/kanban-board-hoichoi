@@ -16,6 +16,24 @@ button { cursor: pointer; }
 	.app-main { @apply min-w-0 pl-0 lg:pl-[228px]; }
 	.app-header { @apply mb-8 flex flex-col gap-6 border-b border-ink/10 pb-7 lg:flex-row lg:items-end lg:justify-between; }
 	.sidebar { @apply fixed inset-y-0 left-0 z-20 hidden w-[228px] flex-col border-r border-ink/10 bg-white/60 px-3 py-3 lg:flex; }
+.sidebar-backdrop { @apply fixed inset-0 z-10 hidden bg-black/30 backdrop-blur-[1px]; }
+.sidebar-backdrop.is-visible { @apply block; }
+.sidebar.mobile-open { @apply z-20 flex; }
+
+@media (max-width: 1023px) {
+	.sidebar {
+		display: none;
+		transform: translateX(-100%);
+		transition: transform 0.2s ease;
+	}
+	.sidebar.mobile-open {
+		display: flex;
+		transform: translateX(0);
+	}
+	.sidebar-backdrop.is-visible {
+		display: block;
+	}
+}
 	.sidebar-brand { @apply flex h-10 items-center gap-2 px-2 font-display text-sm font-bold; }
 	.brand-mark { @apply flex h-6 w-6 items-center justify-center rounded-md bg-coral text-xs font-bold text-white; }
 	.brand-chevron { @apply ml-auto text-ink/35; }

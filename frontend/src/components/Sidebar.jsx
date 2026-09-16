@@ -25,9 +25,10 @@ export default function Sidebar({
   currentUserName = "",
   onLogin = () => {},
   onLogout = () => {},
+  className = "",
 }) {
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${className}`.trim()}>
       <div className="sidebar-brand">
         <span className="brand-mark">O</span>
         <span>Orbit</span>

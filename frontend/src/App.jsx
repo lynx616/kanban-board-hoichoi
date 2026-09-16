@@ -45,6 +45,7 @@ export default function App() {
   const [theme, setTheme] = useState(
     () => localStorage.getItem("kanban-theme") || "dark",
   );
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [activePage, setActivePage] = useState("home");
   const [currentUserName, setCurrentUserName] = useState(
     () => localStorage.getItem("kanban-user-name") || "",
@@ -174,11 +175,19 @@ export default function App() {
 
   return (
     <div className={`app-shell ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
+      <div
+        className={`sidebar-backdrop ${mobileSidebarOpen ? "is-visible" : ""}`}
+        onClick={() => setMobileSidebarOpen(false)}
+      />
       <Sidebar
         activePage={activePage}
-        onNavigate={setActivePage}
+        onNavigate={(page) => {
+          setActivePage(page);
+          setMobileSidebarOpen(false);
+        }}
         activeUsers={activeUsers}
         currentUserName={currentUserName}
+        className={mobileSidebarOpen ? "mobile-open" : ""}
         onLogin={() => {
           const nextName = window.prompt("Enter your name", currentUserName || "Maya Chen");
           if (nextName && nextName.trim()) {
@@ -203,7 +212,11 @@ export default function App() {
       <div className="app-main">
         <header className="topbar">
           <div className="topbar-left">
-            <button className="icon-button mobile-menu" aria-label="Open navigation">
+            <button
+              className="icon-button mobile-menu"
+              aria-label={mobileSidebarOpen ? "Close navigation" : "Open navigation"}
+              onClick={() => setMobileSidebarOpen((open) => !open)}
+            >
               <PanelLeft size={16} />
             </button>
             <div className="workspace-switcher">
