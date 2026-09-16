@@ -17,13 +17,15 @@ The application is intentionally small and dependency-light. Tasks and active us
 
 ## UI Preview
 
-### Light Mode
-
-![Orbit Kanban - Light Mode](docs/screenshots/kanban-light.png)
-
 ### Dark Mode
 
-![Orbit Kanban - Dark Mode](docs/screenshots/kanban-dark.png)
+<img width="1912" height="906" alt="image" src="https://github.com/user-attachments/assets/71470672-0ea5-4a0e-b2e1-158ee694fc35" />
+
+
+### Light Mode
+
+<img width="1912" height="911" alt="image" src="https://github.com/user-attachments/assets/c6312481-d34e-4dd7-a0d4-1ac060ca8384" />
+
 
 ## Technology
 
