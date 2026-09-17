@@ -1,4 +1,5 @@
 import {
+  ChevronDown,
   CircleDot,
   Inbox,
   LogIn,
@@ -7,6 +8,7 @@ import {
   PanelsTopLeft,
   Search,
   Settings2,
+  SquarePen,
 } from "lucide-react";
 
 const pageLinks = [
@@ -30,14 +32,17 @@ export default function Sidebar({
   return (
     <aside className={`sidebar ${className}`.trim()}>
       <div className="sidebar-brand">
-        <span className="brand-mark">O</span>
-        <span>Orbit</span>
-        <span className="brand-chevron">⌄</span>
-      </div>
-      <div className="sidebar-search">
-        <Search size={14} />
-        <span>Quick find</span>
-        <kbd>⌘ K</kbd>
+        <img className="brand-mark" src="/Container (2).png" alt="AI" />
+        <span className="brand-label">Demo Workspace</span>
+        <ChevronDown className="brand-chevron" size={14} aria-hidden="true" />
+        <button type="button" className="sidebar-icon-button" aria-label="Search workspace">
+          <Search size={15} aria-hidden="true" />
+        </button>
+        <button type="button" className="sidebar-compose-button" aria-label="Create new item">
+          <span className="sidebar-compose-icon">
+            <SquarePen size={17} aria-hidden="true" />
+          </span>
+        </button>
       </div>
       <nav className="sidebar-nav" aria-label="Workspace navigation">
         <p className="nav-label">Workspace</p>
