@@ -1,6 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Circle, GripVertical, Pencil } from "lucide-react";
+import { GripVertical, Pencil } from "lucide-react";
 import { columns } from "../constants/board";
 
 export default function TaskCard({ task, onOpen }) {
@@ -12,7 +12,8 @@ export default function TaskCard({ task, onOpen }) {
     transition,
     isDragging,
   } = useSortable({ id: task.id });
-  const StatusIcon = columns.find((column) => column.id === task.status)?.icon || Circle;
+  const statusIconPath =
+    columns.find((column) => column.id === task.status)?.icon || "/backlog.svg";
   const taskNumber = task.id.startsWith("task-")
     ? task.id.replace("task-", "").padStart(3, "0")
     : task.id.slice(0, 6).toUpperCase();
@@ -42,7 +43,7 @@ export default function TaskCard({ task, onOpen }) {
         </button>
       </div>
       <h3 className="task-title">
-        <StatusIcon size={14} className={`task-status-icon status-${task.status}`} />
+        <img className={`task-status-icon status-${task.status}`} src={statusIconPath} alt="" />
         {task.title}
       </h3>
       <p className="task-description">{task.description || "No description yet."}</p>

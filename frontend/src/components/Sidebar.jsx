@@ -1,5 +1,9 @@
 import {
+  Activity,
+  Bot,
+  ChevronDown,
   CircleDot,
+  GitPullRequest,
   Inbox,
   LogIn,
   LogOut,
@@ -7,7 +11,16 @@ import {
   PanelsTopLeft,
   Search,
   Settings2,
+  SquarePen,
 } from "lucide-react";
+
+const primaryLinks = [
+  { label: "Pulse", icon: Activity },
+  { label: "Inbox", icon: Inbox, count: "99+" },
+  { label: "My issues", icon: CircleDot },
+  { label: "Reviews", icon: GitPullRequest },
+  { label: "Agent", icon: Bot },
+];
 
 const pageLinks = [
   { id: "home", label: "Home", icon: PanelsTopLeft },
@@ -30,17 +43,32 @@ export default function Sidebar({
   return (
     <aside className={`sidebar ${className}`.trim()}>
       <div className="sidebar-brand">
-        <span className="brand-mark">O</span>
-        <span>Orbit</span>
-        <span className="brand-chevron">⌄</span>
-      </div>
-      <div className="sidebar-search">
-        <Search size={14} />
-        <span>Quick find</span>
-        <kbd>⌘ K</kbd>
+        <img className="brand-mark" src="/Container (2).png" alt="AI" />
+        <span className="brand-label">Demo Workspace</span>
+        <ChevronDown className="brand-chevron" size={14} aria-hidden="true" />
+        <button type="button" className="sidebar-icon-button" aria-label="Search workspace">
+          <Search size={15} aria-hidden="true" />
+        </button>
+        <button type="button" className="sidebar-compose-button" aria-label="Create new item">
+          <span className="sidebar-compose-icon">
+            <SquarePen size={17} aria-hidden="true" />
+          </span>
+        </button>
       </div>
       <nav className="sidebar-nav" aria-label="Workspace navigation">
-        <p className="nav-label">Workspace</p>
+        <div className="sidebar-primary-links">
+          {primaryLinks.map(({ label, icon: Icon, count }) => (
+            <button key={label} type="button" className="nav-item sidebar-primary-link">
+              <Icon size={14} aria-hidden="true" />
+              <span>{label}</span>
+              {count && <span className="nav-count">{count}</span>}
+            </button>
+          ))}
+        </div>
+        <p className="sidebar-section-label">
+          Workspace
+          <ChevronDown size={12} aria-hidden="true" />
+        </p>
         {pageLinks.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
