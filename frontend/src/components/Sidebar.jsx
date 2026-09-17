@@ -1,6 +1,9 @@
 import {
+  Activity,
+  Bot,
   ChevronDown,
   CircleDot,
+  GitPullRequest,
   Inbox,
   LogIn,
   LogOut,
@@ -10,6 +13,14 @@ import {
   Settings2,
   SquarePen,
 } from "lucide-react";
+
+const primaryLinks = [
+  { label: "Pulse", icon: Activity },
+  { label: "Inbox", icon: Inbox, count: "99+" },
+  { label: "My issues", icon: CircleDot },
+  { label: "Reviews", icon: GitPullRequest },
+  { label: "Agent", icon: Bot },
+];
 
 const pageLinks = [
   { id: "home", label: "Home", icon: PanelsTopLeft },
@@ -45,7 +56,19 @@ export default function Sidebar({
         </button>
       </div>
       <nav className="sidebar-nav" aria-label="Workspace navigation">
-        <p className="nav-label">Workspace</p>
+        <div className="sidebar-primary-links">
+          {primaryLinks.map(({ label, icon: Icon, count }) => (
+            <button key={label} type="button" className="nav-item sidebar-primary-link">
+              <Icon size={14} aria-hidden="true" />
+              <span>{label}</span>
+              {count && <span className="nav-count">{count}</span>}
+            </button>
+          ))}
+        </div>
+        <p className="sidebar-section-label">
+          Workspace
+          <ChevronDown size={12} aria-hidden="true" />
+        </p>
         {pageLinks.map(({ id, label, icon: Icon }) => (
           <button
             key={id}

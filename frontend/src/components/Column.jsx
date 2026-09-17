@@ -5,14 +5,12 @@ import TaskCard from "./TaskCard";
 
 export default function Column({ column, tasks, onOpen }) {
   const { setNodeRef, isOver } = useDroppable({ id: column.id });
-  const Icon = column.icon;
+  const iconPath = column.icon;
   return (
     <div ref={setNodeRef} className={`kanban-column ${isOver ? "is-over" : "is-idle"}`}>
       <div className="column-header">
         <div className="column-heading">
-          <span className={`column-icon ${column.color}`}>
-            <Icon size={16} />
-          </span>
+          <img className="column-status-icon" src={column.icon} alt="" />
           <h2 className="column-title">{column.label}</h2>
           <span className="column-count">{tasks.length}</span>
         </div>
