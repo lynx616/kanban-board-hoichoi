@@ -79,29 +79,29 @@ button { cursor: pointer; }
 	.topbar-left strong { @apply font-medium text-ink/40; }
 	.sprint-chevron { @apply h-3.5 w-3.5 shrink-0 text-ink/35; }
 	.crumb-icon { @apply inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-ink/35 transition hover:bg-ink/5 hover:text-ink; }
-	.icon-button { @apply inline-flex h-8 w-8 items-center justify-center rounded-md text-ink/45 transition hover:bg-ink/5 hover:text-coral; }
+	.icon-button { @apply inline-flex h-8 w-8 items-center justify-center rounded-md text-ink/45 transition hover:bg-ink/5 hover:text-ink; }
 	.mobile-menu { @apply lg:hidden; }
 	.board-heading { @apply flex items-end justify-between gap-4 py-7; }
 	.reference-context { @apply -mx-5 border-b border-ink/10 px-5 sm:-mx-7 sm:px-7 lg:-mx-9 lg:px-9; }
 	.issue-total { @apply py-4 text-sm font-medium text-ink/55; }
 	.reference-filter-row { @apply flex items-center gap-1 border-t border-ink/10 py-2; }
-	.reference-filter { @apply inline-flex items-center gap-2 rounded-md border border-ink/10 bg-white/50 px-2.5 py-1.5 text-xs text-ink/65 transition hover:border-coral/40; }
+	.reference-filter { @apply inline-flex items-center gap-2 rounded-md border border-ink/10 bg-white/50 px-2.5 py-1.5 text-xs text-ink/65 transition hover:border-ink/30; }
 	.reference-filter-word { @apply border-l border-ink/10 pl-2 text-ink/35; }
 	.reference-assignee { @apply font-semibold text-ink/75; }
-	.reference-filter-add { @apply inline-flex h-7 w-7 items-center justify-center rounded-md text-ink/45 transition hover:bg-ink/5 hover:text-coral; }
+	.reference-filter-add { @apply inline-flex h-7 w-7 items-center justify-center rounded-md text-ink/45 transition hover:bg-ink/5 hover:text-ink; }
 	.heading-slash { @apply mx-1 text-ink/25; }
 	.heading-tools { @apply flex items-center gap-1; }
 	.view-button { @apply inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs text-ink/45 transition hover:bg-ink/5 hover:text-ink; }
 	.view-button.active { @apply bg-ink/5 font-semibold text-ink; }
 	.more-button { @apply icon-button; }
 	.header-actions { @apply flex items-center gap-2; }
-	.theme-toggle { @apply inline-flex h-11 w-11 items-center justify-center rounded-xl border border-ink/10 bg-white/70 text-ink/55 transition hover:border-coral hover:bg-coral/10 hover:text-coral; }
+	.theme-toggle { @apply inline-flex h-11 w-11 items-center justify-center rounded-xl border border-ink/10 bg-white/70 text-ink/55 transition hover:border-ink/20 hover:bg-ink/5 hover:text-ink; }
 	.workspace-label { @apply mb-3 flex items-center gap-3 text-xs font-bold uppercase tracking-[.22em] text-ink/50; }
 	.workspace-dot { @apply h-2 w-2 rounded-full bg-coral; }
 	.app-title { @apply font-display text-4xl font-bold tracking-tight sm:text-5xl; }
 	.app-title-mark { @apply text-coral; }
 	.app-subtitle { @apply mt-2 text-sm text-ink/60; }
-	.primary-button { @apply inline-flex items-center justify-center gap-2 rounded-xl bg-ink px-5 py-3 text-sm font-bold text-white shadow-lg shadow-ink/15 transition hover:-translate-y-0.5 hover:bg-coral; }
+	.primary-button { @apply inline-flex items-center justify-center gap-2 rounded-xl bg-ink px-5 py-3 text-sm font-bold text-white shadow-lg shadow-ink/15 transition hover:-translate-y-0.5 hover:bg-ink/90; }
 	.board-toolbar {
 		@apply mb-4 flex flex-col gap-3 border-y border-ink/10 py-3 sm:flex-row sm:items-center sm:justify-between;
 		padding-left: 12px;
@@ -111,8 +111,8 @@ button { cursor: pointer; }
 	.toolbar-controls { @apply flex flex-1 flex-col gap-3 sm:flex-row sm:items-center; }
 	.search-field { @apply relative block min-w-0 flex-1 sm:max-w-sm; }
 	.search-icon { @apply absolute left-3 top-2.5 text-ink/40; }
-	.filter-input { @apply rounded-lg border border-ink/10 bg-mist px-3 py-2 text-sm outline-none focus:border-coral; }
-	.search-input { @apply w-full rounded-lg border border-ink/10 bg-mist py-2 pl-9 pr-3 text-sm outline-none focus:border-coral focus:ring-4 focus:ring-coral/10; }
+	.filter-input { @apply rounded-lg border border-ink/10 bg-mist px-3 py-2 text-sm outline-none focus:border-ink/30; }
+	.search-input { @apply w-full rounded-lg border border-ink/10 bg-mist py-2 pl-9 pr-3 text-sm outline-none focus:border-ink/30 focus:ring-4 focus:ring-ink/10; }
 	.board-status { @apply flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-ink/40; }
 	.status-divider { @apply h-1 w-1 rounded-full bg-mint; }
 	.live-status { @apply flex items-center gap-1.5; }
@@ -130,10 +130,10 @@ button { cursor: pointer; }
 	.column-heading { @apply flex items-center gap-2; }
 	.column-status-icon, .task-status-icon { @apply block h-[14px] w-[14px] shrink-0; }
 	.column-count { @apply rounded-full bg-ink/5 px-2 py-0.5 text-xs font-bold text-ink/50; }
-	.column-add { @apply rounded-lg p-1.5 text-ink/35 transition hover:bg-ink/5 hover:text-coral; }
+	.column-add { @apply rounded-lg p-1.5 text-ink/35 transition hover:bg-ink/5 hover:text-ink; }
 	.task-list { @apply space-y-2; }
 	.empty-column { @apply rounded-xl border border-dashed border-ink/10 py-10 text-center text-xs text-ink/35; }
-	.task-card { @apply cursor-pointer rounded-md border border-ink/10 bg-white p-3 shadow-sm transition hover:border-coral/40 hover:shadow-md; }
+	.task-card { @apply cursor-pointer rounded-md border border-ink/10 bg-white p-3 shadow-sm transition hover:border-ink/30 hover:shadow-md; }
 	.task-card.is-dragging { @apply opacity-40; }
 	.task-card-top { @apply mb-3 flex items-center gap-2; }
 	.task-type-badge { @apply inline-flex items-center rounded-full border px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.12em]; }
@@ -146,7 +146,7 @@ button { cursor: pointer; }
 	.priority-medium { @apply bg-[#fff0a8] text-[#766000]; }
 	.priority-low { @apply bg-[#dce8ff] text-[#31578e]; }
 	.drag-handle { @apply cursor-grab touch-none text-ink/35 transition; -webkit-tap-highlight-color: transparent; }
-	.drag-handle:hover { @apply text-coral; }
+	.drag-handle:hover { @apply text-ink; }
 	.drag-handle:active { @apply cursor-grabbing; }
 	.task-title { @apply flex items-start gap-1.5 font-display text-sm font-bold leading-snug; }
 	.task-status-icon { @apply mt-0.5 shrink-0; }
@@ -173,12 +173,12 @@ button { cursor: pointer; }
 	.modal-close { @apply rounded-lg p-2 text-ink/40 hover:bg-mist; }
 	.task-form { @apply space-y-4; }
 	.form-label { @apply block text-sm font-semibold; }
-	.form-control { @apply mt-1.5 w-full rounded-lg border border-ink/10 bg-mist px-3 py-2.5 text-sm outline-none focus:border-coral; }
+	.form-control { @apply mt-1.5 w-full rounded-lg border border-ink/10 bg-mist px-3 py-2.5 text-sm outline-none focus:border-ink/30; }
 	.form-grid { @apply grid gap-4 sm:grid-cols-3; }
 	.modal-footer { @apply mt-7 flex items-center justify-between border-t border-ink/10 pt-5; }
 	.delete-button { @apply inline-flex items-center gap-2 text-sm font-bold text-red-600 hover:text-red-800; }
 	.modal-note { @apply text-xs text-ink/40; }
-	.save-button { @apply rounded-xl bg-ink px-5 py-2.5 text-sm font-bold text-white transition hover:bg-coral disabled:cursor-wait disabled:opacity-60; }
+	.save-button { @apply rounded-xl bg-ink px-5 py-2.5 text-sm font-bold text-white transition hover:bg-ink/90 disabled:cursor-wait disabled:opacity-60; }
 }
 
 @layer components {
@@ -207,7 +207,7 @@ button { cursor: pointer; }
 	.theme-dark .topbar-left strong { @apply text-white; }
 	.theme-dark .crumb-divider,
 	.theme-dark .topbar-muted { @apply text-white/25; }
-	.theme-dark .icon-button { @apply text-white/45 hover:bg-white/5 hover:text-coral; }
+	.theme-dark .icon-button { @apply text-white/45 hover:bg-white/5 hover:text-white; }
 	.theme-dark .crumb-icon { @apply text-white/45 hover:bg-white/5 hover:text-white; }
 	.theme-dark .sprint-chevron { @apply text-white/45; }
 	.theme-dark .heading-slash { @apply text-white/20; }
@@ -216,27 +216,27 @@ button { cursor: pointer; }
 	.theme-dark .reference-context { @apply border-white/10; }
 	.theme-dark .issue-total { @apply text-white/55; }
 	.theme-dark .reference-filter-row { @apply border-white/10; }
-	.theme-dark .reference-filter { @apply border-white/10 bg-white/5 text-white/65 hover:border-coral/40; }
+	.theme-dark .reference-filter { @apply border-white/10 bg-white/5 text-white/65 hover:border-white/40; }
 	.theme-dark .reference-filter-word { @apply border-white/10 text-white/35; }
 	.theme-dark .reference-assignee { @apply text-white/80; }
-	.theme-dark .reference-filter-add { @apply text-white/45 hover:bg-white/5 hover:text-coral; }
+	.theme-dark .reference-filter-add { @apply text-white/45 hover:bg-white/5 hover:text-white; }
 	.theme-dark .app-header { @apply border-white/10; }
 	.theme-dark .workspace-label,
 	.theme-dark .app-subtitle,
 	.theme-dark .board-status { @apply text-white/50; }
-	.theme-dark .theme-toggle { @apply border-white/10 bg-white/5 text-white/65 hover:border-coral hover:bg-coral/10 hover:text-coral; }
-	.theme-dark .primary-button { @apply bg-white text-ink hover:bg-coral hover:text-white; }
+	.theme-dark .theme-toggle { @apply border-white/10 bg-white/5 text-white/65 hover:border-white/40 hover:bg-white/10 hover:text-white; }
+	.theme-dark .primary-button { @apply bg-white text-ink hover:bg-white/90; }
 	.theme-dark .board-toolbar { @apply border-white/10 bg-[#171a1e] shadow-black/20; }
 	.theme-dark .search-input,
 	.theme-dark .filter-input,
 	.theme-dark .form-control { @apply border-white/10 bg-[#101214] text-white placeholder:text-white/30; }
 	.theme-dark .search-input:focus,
 	.theme-dark .filter-input:focus,
-	.theme-dark .form-control:focus { @apply border-coral; }
+	.theme-dark .form-control:focus { @apply border-white/40 focus:ring-white/10; }
 	.theme-dark .kanban-column.is-idle { @apply border-white/10 bg-[#15181b]; }
 	.theme-dark .kanban-column.is-over { @apply border-coral bg-coral/10; }
 	.theme-dark .column-count { @apply bg-white/10 text-white/55; }
-	.theme-dark .column-add { @apply text-white/40 hover:bg-white/10 hover:text-coral; }
+	.theme-dark .column-add { @apply text-white/40 hover:bg-white/10 hover:text-white; }
 	.theme-dark .empty-column { @apply border-white/10 text-white/30; }
 	.theme-dark .task-card { @apply border-white/10 bg-[#1b1f23] shadow-black/20 hover:bg-[#20252a]; }
 	.theme-dark .task-description { @apply text-white/55; }
@@ -248,6 +248,7 @@ button { cursor: pointer; }
 	.theme-dark .status-backlog, .theme-dark .status-todo { @apply text-white/55; }
 	.theme-dark .task-footer { @apply border-white/10 text-white/45; }
 	.theme-dark .drag-handle { @apply text-white/40; }
+	.theme-dark .drag-handle:hover { @apply text-white; }
 	.theme-dark .loading-state { @apply border-white/15 bg-white/5 text-white/50; }
 	.theme-dark .error-state { @apply border-red-400/30 bg-red-950/30 text-red-200; }
 	.theme-dark .blank-page { @apply border-white/10 bg-white/5; }
@@ -258,7 +259,7 @@ button { cursor: pointer; }
 	.theme-dark .modal-close { @apply text-white/45 hover:bg-white/10; }
 	.theme-dark .modal-footer { @apply border-white/10; }
 	.theme-dark .modal-note { @apply text-white/40; }
-	.theme-dark .save-button { @apply bg-white text-ink hover:bg-coral hover:text-white; }
+	.theme-dark .save-button { @apply bg-white text-ink hover:bg-white/10; }
 }
 
 @media (max-width: 1023px) {
