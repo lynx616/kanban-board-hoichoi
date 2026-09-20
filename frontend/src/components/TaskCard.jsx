@@ -30,9 +30,7 @@ export default function TaskCard({ task, onOpen }) {
       className={`task-card group ${isDragging ? "is-dragging" : ""}`}
     >
       <div className="task-card-top">
-        <span className={`task-type-badge task-type-${taskType}`}>{taskType}</span>
         <span className="task-id">DEMO-{taskNumber}</span>
-        <span className={`priority-badge priority-${task.priority}`}>{task.priority}</span>
         <button
           {...listeners}
           onClick={(e) => e.stopPropagation()}
@@ -48,12 +46,10 @@ export default function TaskCard({ task, onOpen }) {
       </h3>
       <p className="task-description">{task.description || "No description yet."}</p>
       <div className="task-tags">
+        <span className={`priority-badge priority-${task.priority}`}>{task.priority}</span>
+        <span className={`task-type-badge task-type-${taskType}`}>{taskType}</span>
         <span className="task-chip">
-          <span className={`chip-dot priority-dot-${task.priority}`} />
-          {task.priority}
-        </span>
-        <span className="task-chip">
-          <span className="chip-dot assignee-dot" />
+          <span className={`chip-dot assignee-dot`} />
           {task.assignee || "Unassigned"}
         </span>
       </div>

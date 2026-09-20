@@ -3,11 +3,14 @@ import { DndContext } from "@dnd-kit/core";
 import {
   ChevronDown,
   ChevronRight,
+  Filter,
   MoreHorizontal,
   Moon,
+  PanelLeft,
   Plus,
   Search,
   Settings2,
+  SlidersHorizontal,
   Star,
   Sun,
   UserRound,
@@ -249,10 +252,10 @@ export default function App() {
               aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
               title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
             >
-              {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
+              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
             </button>
             <button onClick={() => setModal({ task: null })} className="primary-button">
-              <Plus size={18} /> <span className="primary-button-label">New task</span>
+              <Plus size={16} /> <span className="primary-button-label">New task</span>
             </button>
           </div>
         </header>
@@ -260,7 +263,36 @@ export default function App() {
           {isBoardView ? (
             <>
               <div className="reference-context">
-                <div className="issue-total">{boardTasks.length} issues</div>
+                <div className="issue-total-row">
+                  <div className="issue-total">{boardTasks.length} issues</div>
+                  <div className="issue-total-actions" aria-label="Board view actions">
+                    <button
+                      type="button"
+                      className="issue-total-icon-button"
+                      aria-label="Filter board"
+                      title="Filter board"
+                    >
+                      <Filter size={16} aria-hidden="true" />
+                    </button>
+                    <button
+                      type="button"
+                      className="issue-total-icon-button"
+                      aria-label="Adjust board settings"
+                      title="Adjust board settings"
+                    >
+                      <SlidersHorizontal size={16} aria-hidden="true" />
+                      <span className="issue-total-notification-dot" aria-hidden="true" />
+                    </button>
+                    <button
+                      type="button"
+                      className="issue-total-icon-button"
+                      aria-label="Toggle board panel"
+                      title="Toggle board panel"
+                    >
+                      <PanelLeft size={16} aria-hidden="true" />
+                    </button>
+                  </div>
+                </div>
                 <div className="reference-filter-row">
                   <button className="reference-filter">
                     <UserRound size={13} />
@@ -272,6 +304,22 @@ export default function App() {
                   <button className="reference-filter-add" aria-label="Add filter">
                     <Plus size={15} />
                   </button>
+                  <div className="reference-filter-actions">
+                    <button
+                      type="button"
+                      className="reference-clear-button"
+                      onClick={() => {
+                        setAssignee("");
+                        setPriority("");
+                        setQuery("");
+                      }}
+                    >
+                      Clear
+                    </button>
+                    <button type="button" className="reference-save-button" aria-label="Save filters">
+                      Save
+                    </button>
+                  </div>
                 </div>
               </div>
               <section className="board-toolbar">

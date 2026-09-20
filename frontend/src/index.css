@@ -82,28 +82,35 @@ button { cursor: pointer; }
 	.topbar-left strong { @apply font-medium text-ink/40; }
 	.sprint-chevron { @apply h-3.5 w-3.5 shrink-0 text-ink/35; }
 	.crumb-icon { @apply inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-ink/35 transition hover:bg-ink/5 hover:text-ink; }
-	.icon-button { @apply inline-flex h-8 w-8 items-center justify-center rounded-md text-ink/45 transition hover:bg-ink/5 hover:text-ink; }
+	.icon-button { @apply inline-flex h-7 w-7 items-center justify-center rounded-md text-ink/45 transition hover:bg-ink/5 hover:text-ink; }
 	.mobile-menu { @apply lg:hidden; }
 	.board-heading { @apply flex items-end justify-between gap-4 py-7; }
+	.issue-total-row { @apply flex min-w-0 items-center justify-between gap-3; }
 	.issue-total { @apply py-2 text-sm font-medium text-ink/55; }
-	.reference-filter-row { @apply flex w-max min-w-full items-center gap-1 border-t  border-ink/10 p-2.5 rounded-t-[8px]; }
+	.issue-total-actions { @apply my-2 flex shrink-0 items-center gap-1.5; }
+	.issue-total-icon-button { @apply relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-ink/50 shadow-sm transition hover:bg-mist hover:text-ink; }
+	.issue-total-notification-dot { @apply absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-[#5e6ad2] ring-2 ring-white; }
+	.reference-filter-row { @apply flex w-max min-w-full items-center gap-1 bg-[#1A1A1B] border-t  border-ink/10 p-2.5 rounded-t-[8px]; }
 	.reference-filter { @apply inline-flex shrink-0 items-center gap-2 rounded-md border border-ink/10 bg-white/50 px-2.5 py-1.5 text-xs text-ink/65 transition hover:border-ink/30; }
 	.reference-filter-word { @apply border-l border-ink/10 pl-2 text-ink/35; }
 	.reference-assignee { @apply font-semibold text-ink/75; }
 	.reference-filter-add { @apply inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-ink/45 transition hover:bg-ink/5 hover:text-ink; }
+	.reference-filter-actions { @apply ml-auto flex shrink-0 items-center gap-2; }
+	.reference-clear-button { @apply rounded-full px-3 py-1.5 text-xs font-medium text-ink/55 transition hover:bg-ink/5 hover:text-ink; }
+	.reference-save-button { @apply rounded-full border border-[rgb(255_255_255/0.1)] bg-[#1A1A1B] px-3.5 py-1.5 text-xs font-semibold text-white shadow-sm transition hover:bg-[#242426]; }
 	.heading-slash { @apply mx-1 text-ink/25; }
 	.heading-tools { @apply flex items-center gap-1; }
 	.view-button { @apply inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs text-ink/45 transition hover:bg-ink/5 hover:text-ink; }
 	.view-button.active { @apply bg-ink/5 font-semibold text-ink; }
 	.more-button { @apply icon-button; }
 	.header-actions { @apply flex items-center gap-2; }
-	.theme-toggle { @apply inline-flex h-11 w-11 items-center justify-center rounded-xl border border-ink/10 bg-white/70 text-ink/55 transition hover:border-ink/20 hover:bg-ink/5 hover:text-ink; }
+	.theme-toggle { @apply inline-flex h-8 w-8 items-center justify-center rounded-lg border border-ink/10 bg-white/70 text-ink/55 transition hover:border-ink/20 hover:bg-ink/5 hover:text-ink; }
 	.workspace-label { @apply mb-3 flex items-center gap-3 text-xs font-bold uppercase tracking-[.22em] text-ink/50; }
 	.workspace-dot { @apply h-2 w-2 rounded-full bg-coral; }
 	.app-title { @apply font-display text-4xl font-bold tracking-tight sm:text-5xl; }
 	.app-title-mark { @apply text-coral; }
 	.app-subtitle { @apply mt-2 text-sm text-ink/60; }
-	.primary-button { @apply inline-flex items-center justify-center gap-2 rounded-xl bg-ink px-5 py-3 text-sm font-bold text-white shadow-lg shadow-ink/15 transition hover:-translate-y-0.5 hover:bg-ink/90; }
+	.primary-button { @apply inline-flex items-center justify-center gap-2 rounded-lg bg-ink px-3.5 py-2 text-xs font-bold text-white shadow-lg shadow-ink/15 transition hover:-translate-y-0.5 hover:bg-ink/90; }
 	.board-toolbar {
 		@apply mb-4 flex flex-col gap-3 border-y border-ink/10 py-3 sm:flex-row sm:items-center sm:justify-between;
 		padding-left: 12px;
@@ -129,6 +136,7 @@ button { cursor: pointer; }
 	.kanban-column.is-over { @apply border-coral bg-coral/5; }
 	.kanban-column.is-idle { @apply border-ink/10 bg-white/55; }
 	.column-header { @apply mb-2 flex items-center justify-between px-1; }
+	.column-actions { @apply flex items-center gap-1; }
 	.column-heading { @apply flex items-center gap-2; }
 	.column-status-icon, .task-status-icon { @apply block h-[14px] w-[14px] shrink-0; }
 	.column-count { @apply rounded-full bg-ink/5 px-2 py-0.5 text-xs font-bold text-ink/50; }
@@ -142,12 +150,12 @@ button { cursor: pointer; }
 	.task-type-defect { @apply border-red-200 bg-red-50 text-red-600; }
 	.task-type-task { @apply border-blue-200 bg-blue-50 text-blue-600; }
 	.task-type-story { @apply border-emerald-200 bg-emerald-50 text-emerald-600; }
-	.task-id { @apply ml-auto text-[10px] font-medium text-ink/40; }
+	.task-id { @apply text-[10px] font-medium text-ink/40; }
 	.priority-badge { @apply rounded-md px-2 py-1 text-[10px] font-bold uppercase tracking-wider; }
 	.priority-high { @apply bg-[#ffe0dc] text-[#b33e2b]; }
 	.priority-medium { @apply bg-[#fff0a8] text-[#766000]; }
 	.priority-low { @apply bg-[#dce8ff] text-[#31578e]; }
-	.drag-handle { @apply cursor-grab touch-none text-ink/35 transition; -webkit-tap-highlight-color: transparent; }
+	.drag-handle { @apply ml-auto cursor-grab touch-none text-ink/35 transition; -webkit-tap-highlight-color: transparent; }
 	.drag-handle:hover { @apply text-ink; }
 	.drag-handle:active { @apply cursor-grabbing; }
 	.task-title { @apply flex items-start gap-1.5 font-display text-sm font-bold leading-snug; }
@@ -219,11 +227,15 @@ button { cursor: pointer; }
 	.theme-dark .view-button.active { @apply bg-white/10 text-white; }
 	/* .theme-dark .reference-context { @apply border-white/10; } */
 	.theme-dark .issue-total { @apply text-white/55; }
+	.theme-dark .issue-total-icon-button { @apply bg-[#1A1A1B] text-white/60 shadow-black/20 hover:bg-[#242426] hover:text-white; }
+	.theme-dark .issue-total-notification-dot { @apply ring-[#1A1A1B]; }
 	.theme-dark .reference-filter-row { @apply bg-[#1A1A1B]; }
 	.theme-dark .reference-filter { @apply border-white/10 bg-white/5 text-white/65 hover:border-white/40; }
 	.theme-dark .reference-filter-word { @apply border-white/10 text-white/35; }
 	.theme-dark .reference-assignee { @apply text-white/80; }
 	.theme-dark .reference-filter-add { @apply text-white/45 hover:bg-white/5 hover:text-white; }
+	.theme-dark .reference-clear-button { @apply text-white/55 hover:bg-white/5 hover:text-white; }
+	.theme-dark .reference-save-button { @apply border-[rgb(255_255_255/0.1)] bg-[#1A1A1B] text-white hover:bg-[#242426]; }
 	.theme-dark .app-header { @apply border-white/10; }
 	.theme-dark .workspace-label,
 	.theme-dark .app-subtitle,
@@ -244,6 +256,9 @@ button { cursor: pointer; }
 	.theme-dark .empty-column { @apply border-white/10 text-white/30; }
 	.theme-dark .task-card { @apply  bg-[#1A1A1B] shadow-black/20 hover:bg-[#20252a]; }
 	.theme-dark .task-description { @apply text-white/55; }
+	.theme-dark .priority-high { @apply bg-red-500/15 text-red-300; }
+	.theme-dark .priority-medium { @apply bg-amber-500/15 text-amber-200; }
+	.theme-dark .priority-low { @apply bg-blue-500/15 text-blue-300; }
 	.theme-dark .task-id { @apply text-white/35; }
 	.theme-dark .task-type-defect { @apply border-red-500/20 bg-red-500/10 text-red-300; }
 	.theme-dark .task-type-task { @apply border-blue-500/20 bg-blue-500/10 text-blue-300; }
@@ -282,8 +297,8 @@ button { cursor: pointer; }
 	.workspace-switcher { min-width: 0; }
 	.workspace-switcher > span:last-of-type { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 	.crumb-chevron, .crumb-icon, .topbar-left strong { display: none; }
-	.theme-toggle { height: 36px; width: 36px; }
-	.primary-button { padding: 10px 12px; }
+	.theme-toggle { height: 32px; width: 32px; }
+	.primary-button { padding: 8px 10px; }
 	.primary-button-label { display: none; }
 	.board-heading { align-items: flex-start; flex-direction: column; padding-top: 20px; }
 	.reference-context { margin: 0; padding-left: 1rem; padding-right: 1rem; }
