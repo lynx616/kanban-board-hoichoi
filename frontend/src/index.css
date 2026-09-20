@@ -315,9 +315,25 @@ button { cursor: pointer; }
 	.primary-button { padding: 8px 10px; }
 	.primary-button-label { display: none; }
 	.board-heading { align-items: flex-start; flex-direction: column; padding-top: 20px; }
-	.reference-context { margin: 0; padding-left: 1rem; padding-right: 1rem; }
-	.reference-filter-row { overflow-x: visible; }
-	.reference-filter { flex: 0 0 auto; }
+	.issue-total-row { @apply gap-1 p-0; }
+	.issue-total-actions { @apply gap-1; }
+	.issue-total-icon-button { @apply h-7 w-7; }
+	.reference-context { margin: 0; padding-left: 0.25rem; padding-right: 0.25rem; overflow: visible; }
+	.reference-filter-row {
+		@apply w-full min-w-0 max-w-full flex-nowrap gap-1 overflow-x-auto whitespace-nowrap p-2;
+		overscroll-behavior-x: contain;
+		scrollbar-width: thin;
+	}
+	.reference-filter { @apply h-7 gap-1 px-2 py-1 text-[11px]; }
+	.reference-filter > svg { @apply h-3 w-3; }
+	.reference-filter-word { @apply px-1 py-0.5; }
+	.reference-assignee { @apply gap-1; }
+	.reference-assignee-avatar { @apply h-4 w-4 text-[7px]; }
+	.reference-filter-remove { @apply h-3.5 w-3.5 pl-1 ml-0.5; }
+	.reference-filter-add { @apply h-7 w-7; }
+	.reference-filter-actions { @apply gap-1; }
+	.reference-clear-button { @apply px-2 py-1 text-[10px]; }
+	.reference-save-button { @apply px-2 py-1 text-[10px]; }
 	.board-toolbar { align-items: stretch; margin-left: -4px; margin-right: -4px; padding-left: 4px; padding-right: 4px; }
 	.toolbar-controls { gap: 8px; }
 	.filter-input { width: 100%; }
