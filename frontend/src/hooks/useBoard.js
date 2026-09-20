@@ -20,8 +20,8 @@ export function useBoard() {
   const tasksRef = useRef([]);
   tasksRef.current = tasks;
   const sensors = useSensors(
-    useSensor(MouseSensor, { activationConstraint: { distance: 6 } }),
-    useSensor(TouchSensor, { activationConstraint: { delay: 220, tolerance: 8 } }),
+    useSensor(MouseSensor, { activationConstraint: { distance: 3 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 120, tolerance: 8 } }),
   );
 
   const notify = (message) => {
