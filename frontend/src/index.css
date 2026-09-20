@@ -339,7 +339,8 @@ button { cursor: pointer; }
 	.filter-input { width: 100%; }
 	.board-status { justify-content: space-between; }
 	.kanban-column { min-height: 440px; }
-	.task-card { padding: 12px; }
+	.task-card { padding: 12px; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; }
+	.task-card:active { cursor: grabbing; }
 	.task-card-top { gap: 6px; }
 	.task-description { overflow-wrap: anywhere; }
 	.modal-backdrop { padding: 8px; }
