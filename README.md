@@ -20,11 +20,13 @@ The application is intentionally small and dependency-light. Tasks and active us
 
 ### Dark Mode
 
-<img width="1911" height="913" alt="image" src="https://github.com/user-attachments/assets/e052ab1a-55f0-4310-bfd8-21bafa1eb4ea" />
+<img width="1912" height="912" alt="image" src="https://github.com/user-attachments/assets/3f67486f-14bf-4b4d-9bad-1cff15fc9385" />
+
 
 ### Light Mode
 
-<img width="1913" height="912" alt="image" src="https://github.com/user-attachments/assets/c3d031fb-46b0-4258-8fd5-9c1bda0f5fbe" />
+<img width="1915" height="908" alt="image" src="https://github.com/user-attachments/assets/2d73c29d-92d8-43af-a677-8e2e22b005d5" />
+
 
 ## Technology
 
