@@ -272,7 +272,7 @@ export default function App() {
                       aria-label="Filter board"
                       title="Filter board"
                     >
-                      <Filter size={16} aria-hidden="true" />
+                      <Filter size={14} aria-hidden="true" />
                     </button>
                     <button
                       type="button"
@@ -280,7 +280,7 @@ export default function App() {
                       aria-label="Adjust board settings"
                       title="Adjust board settings"
                     >
-                      <SlidersHorizontal size={16} aria-hidden="true" />
+                      <SlidersHorizontal size={14} aria-hidden="true" />
                       <span className="issue-total-notification-dot" aria-hidden="true" />
                     </button>
                     <button
@@ -289,18 +289,39 @@ export default function App() {
                       aria-label="Toggle board panel"
                       title="Toggle board panel"
                     >
-                      <PanelLeft size={16} aria-hidden="true" />
+                      <PanelLeft size={14} aria-hidden="true" />
                     </button>
                   </div>
                 </div>
                 <div className="reference-filter-row">
-                  <button className="reference-filter">
-                    <UserRound size={13} />
+                  <div
+                    className="reference-filter"
+                    aria-label={`Assignee filter: ${assignee || "Everyone"}`}
+                  >
+                    <UserRound size={14} aria-hidden="true" />
                     <span>Assignee</span>
                     <span className="reference-filter-word">is</span>
-                    <span className="reference-assignee">{assignee || "Everyone"}</span>
-                    {assignee && <X size={13} onClick={() => setAssignee("")} />}
-                  </button>
+                    {assignee ? (
+                      <>
+                        <span className="reference-assignee-avatar" aria-hidden="true">
+                          {makeInitials(assignee)}
+                        </span>
+                        <span className="reference-assignee">{assignee}</span>
+                      </>
+                    ) : (
+                      <span className="reference-assignee">Everyone</span>
+                    )}
+                    {assignee && (
+                      <button
+                        type="button"
+                        className="reference-filter-remove"
+                        aria-label="Clear assignee filter"
+                        onClick={() => setAssignee("")}
+                      >
+                        <X size={12} aria-hidden="true" />
+                      </button>
+                    )}
+                  </div>
                   <button className="reference-filter-add" aria-label="Add filter">
                     <Plus size={15} />
                   </button>
@@ -326,7 +347,7 @@ export default function App() {
                 <div className="toolbar-controls">
                   <label className="search-field">
                     <span className="sr-only">Search tasks</span>
-                    <Search className="search-icon" size={16} />
+                    <Search className="search-icon" size={16} aria-hidden="true" />
                     <input
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
