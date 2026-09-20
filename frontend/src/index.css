@@ -28,7 +28,7 @@ button { cursor: pointer; }
 		transform: translateX(-100%);
 		transition: transform 0.2s ease;
 	}
-	.theme-dark .sidebar { background-color: #09090A; }
+	.theme-dark .sidebar { background-color: #09090B; }
 	.sidebar.mobile-open {
 		display: flex;
 		transform: translateX(0);
@@ -203,7 +203,7 @@ button { cursor: pointer; }
 }
 
 @layer components {
-	.theme-dark { @apply bg-[#101214] text-[#edf1f4]; }
+	.theme-dark { @apply bg-[#09090B] text-[#edf1f4]; }
 	.theme-dark .sidebar { @apply bg-[#09090A]; }
 	.theme-dark .app-main { @apply bg-[#09090A]; }
 	.theme-dark .brand-label { @apply text-white/70; }
