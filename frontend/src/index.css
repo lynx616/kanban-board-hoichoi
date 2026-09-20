@@ -28,7 +28,7 @@ button { cursor: pointer; }
 		transform: translateX(-100%);
 		transition: transform 0.2s ease;
 	}
-	.theme-dark .sidebar { background-color: #111315; }
+	.theme-dark .sidebar { background-color: #09090A; }
 	.sidebar.mobile-open {
 		display: flex;
 		transform: translateX(0);
@@ -183,7 +183,7 @@ button { cursor: pointer; }
 
 @layer components {
 	.theme-dark { @apply bg-[#101214] text-[#edf1f4]; }
-	.theme-dark .sidebar { @apply border-white/10 bg-[#111315]; }
+	.theme-dark .sidebar { @apply border-white/10 bg-[#09090A]; }
 	.theme-dark .brand-label { @apply text-white/70; }
 	.theme-dark .brand-chevron { @apply text-white/50; }
 	.theme-dark .sidebar-icon-button { @apply text-white/40 hover:bg-white/5 hover:text-white; }
