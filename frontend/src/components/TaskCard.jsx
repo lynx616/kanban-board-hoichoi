@@ -7,6 +7,7 @@ export default function TaskCard({ task, onOpen }) {
   const {
     attributes,
     listeners,
+    setActivatorNodeRef,
     setNodeRef,
     transform,
     transition,
@@ -23,16 +24,19 @@ export default function TaskCard({ task, onOpen }) {
   const taskType = (task.type || "task").toLowerCase();
   return (
     <article
-      ref={setNodeRef}
+      ref={(node) => {
+        setNodeRef(node);
+        setActivatorNodeRef(node);
+      }}
       style={{ transform: CSS.Transform.toString(transform), transition }}
       {...attributes}
+      {...listeners}
       onClick={() => onOpen(task)}
       className={`task-card group ${isDragging ? "is-dragging" : ""}`}
     >
       <div className="task-card-top">
         <span className="task-id">DEMO-{taskNumber}</span>
         <button
-          {...listeners}
           onClick={(e) => e.stopPropagation()}
           className="drag-handle"
           aria-label="Drag task"
