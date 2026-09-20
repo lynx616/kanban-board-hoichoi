@@ -1,6 +1,6 @@
 import { useDroppable } from "@dnd-kit/core";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
-import { CirclePlus } from "lucide-react";
+import { MoreHorizontal, Plus } from "lucide-react";
 import TaskCard from "./TaskCard";
 
 export default function Column({ column, tasks, onOpen }) {
@@ -14,13 +14,18 @@ export default function Column({ column, tasks, onOpen }) {
           <h2 className="column-title">{column.label}</h2>
           <span className="column-count">{tasks.length}</span>
         </div>
-        <button
-          onClick={() => onOpen({ status: column.id })}
-          className="column-add"
-          aria-label={`Add task to ${column.label}`}
-        >
-          <CirclePlus size={18} />
-        </button>
+        <div className="column-actions">
+          <span className="column-add" aria-hidden="true">
+            <MoreHorizontal size={18} />
+          </span>
+          <button
+            onClick={() => onOpen({ status: column.id })}
+            className="column-add"
+            aria-label={`Add task to ${column.label}`}
+          >
+            <Plus size={18} />
+          </button>
+        </div>
       </div>
       <SortableContext items={tasks.map((task) => task.id)} strategy={verticalListSortingStrategy}>
         <div className="task-list">

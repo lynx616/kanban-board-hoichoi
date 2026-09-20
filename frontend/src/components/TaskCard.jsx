@@ -30,9 +30,7 @@ export default function TaskCard({ task, onOpen }) {
       className={`task-card group ${isDragging ? "is-dragging" : ""}`}
     >
       <div className="task-card-top">
-        <span className={`task-type-badge task-type-${taskType}`}>{taskType}</span>
         <span className="task-id">DEMO-{taskNumber}</span>
-        <span className={`priority-badge priority-${task.priority}`}>{task.priority}</span>
         <button
           {...listeners}
           onClick={(e) => e.stopPropagation()}
@@ -48,9 +46,16 @@ export default function TaskCard({ task, onOpen }) {
       </h3>
       <p className="task-description">{task.description || "No description yet."}</p>
       <div className="task-tags">
-        <span className="task-chip">
-          <span className={`chip-dot priority-dot-${task.priority}`} />
+        <span className="task-network-icon" aria-hidden="true">
+          <img className="task-network-icon-image" src="/Img%20-%20Medium%20Priority.svg" alt="" />
+        </span>
+        <span className={`task-chip priority-badge priority-${task.priority}`}>
+          <span className="chip-dot" />
           {task.priority}
+        </span>
+        <span className={`task-chip task-type-badge task-type-${taskType}`}>
+          <span className="chip-dot" />
+          {taskType}
         </span>
         <span className="task-chip">
           <span className="chip-dot assignee-dot" />
@@ -58,7 +63,7 @@ export default function TaskCard({ task, onOpen }) {
         </span>
       </div>
       <div className="task-footer">
-        <span>Updated {updatedDate}</span>
+        <span>Created {updatedDate}</span>
         <Pencil size={13} className="edit-icon" />
       </div>
     </article>
