@@ -135,7 +135,7 @@ button { cursor: pointer; }
 	.error-state { @apply rounded-2xl border border-red-200 bg-red-50 p-8 text-center text-sm text-red-700; }
 	.blank-page { @apply flex min-h-[420px] w-full items-center justify-center rounded-2xl border border-dashed border-ink/10 bg-white/10; }
 	.blank-page-message { @apply text-sm font-medium text-ink/45; }
-	.board-grid { @apply flex gap-2 overflow-x-auto pb-4; }
+	.board-grid { @apply flex gap-2 overflow-x-auto pb-4; overscroll-behavior-x: contain; touch-action: pan-x; }
 	.kanban-column { @apply min-h-[520px] min-w-[250px] flex-1 rounded-md border p-2 transition; }
 	.kanban-column.is-over { @apply border-coral bg-coral/5; }
 	.kanban-column.is-idle { @apply border-ink/10 bg-white/55; }
@@ -147,7 +147,7 @@ button { cursor: pointer; }
 	.column-add { @apply rounded-lg p-1.5 text-ink/35 transition hover:bg-ink/5 hover:text-ink; }
 	.task-list { @apply space-y-2; }
 	.empty-column { @apply rounded-xl border border-dashed border-ink/10 py-10 text-center text-xs text-ink/35; }
-	.task-card { @apply cursor-default rounded-[8px] border border-ink/10 bg-white p-3 shadow-sm transition hover:border-ink/30 hover:shadow-md touch-none select-none; -webkit-user-select: none; }
+	.task-card { @apply cursor-default rounded-[8px] border border-ink/10 bg-white p-3 shadow-sm transition hover:border-ink/30 hover:shadow-md select-none; -webkit-user-select: none; touch-action: pan-x; }
 	.task-card:active { @apply cursor-default; }
 	.task-card.is-dragging { @apply cursor-grabbing opacity-40; }
 	.task-type-badge { @apply inline-flex items-center rounded-full border px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.12em]; }
@@ -339,7 +339,7 @@ button { cursor: pointer; }
 	.filter-input { width: 100%; }
 	.board-status { justify-content: space-between; }
 	.kanban-column { min-height: 440px; }
-	.task-card { padding: 12px; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; }
+	.task-card { padding: 12px; cursor: grab; touch-action: pan-x; user-select: none; -webkit-user-select: none; }
 	.task-card:active { cursor: grabbing; }
 	.task-card-top { gap: 6px; }
 	.task-description { overflow-wrap: anywhere; }
