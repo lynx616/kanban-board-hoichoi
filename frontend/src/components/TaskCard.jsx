@@ -1,6 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { GripVertical, Pencil } from "lucide-react";
+import { Pencil } from "lucide-react";
 import { columns } from "../constants/board";
 
 export default function TaskCard({ task, onOpen }) {
@@ -15,13 +15,13 @@ export default function TaskCard({ task, onOpen }) {
   } = useSortable({ id: task.id });
   const statusIconPath =
     columns.find((column) => column.id === task.status)?.icon || "/backlog.svg";
-  const taskNumber = task.id.startsWith("task-")
-    ? task.id.replace("task-", "").padStart(3, "0")
-    : task.id.slice(0, 6).toUpperCase();
   const updatedDate = task.updatedAt
     ? new Date(task.updatedAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })
     : "Recently";
   const taskType = (task.type || "task").toLowerCase();
+  const taskNumber = task.id.startsWith("task-")
+    ? task.id.replace("task-", "").padStart(3, "0")
+    : task.id.slice(0, 6).toUpperCase();
   return (
     <article
       ref={(node) => {
@@ -34,21 +34,12 @@ export default function TaskCard({ task, onOpen }) {
       onClick={() => onOpen(task)}
       className={`task-card group ${isDragging ? "is-dragging" : ""}`}
     >
-      <div className="task-card-top">
-        <span className="task-id">DEMO-{taskNumber}</span>
-        <button
-          onClick={(e) => e.stopPropagation()}
-          className="drag-handle"
-          aria-label="Drag task"
-        >
-          <GripVertical size={17} />
-        </button>
-      </div>
+      <span className="task-id">DEMO-{taskNumber}</span>
       <h3 className="task-title">
         <img className={`task-status-icon status-${task.status}`} src={statusIconPath} alt="" />
         {task.title}
       </h3>
-      <p className="task-description">{task.description || "No description yet."}</p>
+      {/* <p className="task-description">{task.description || "No description yet."}</p> */}
       <div className="task-tags">
         <span className="task-network-icon" aria-hidden="true">
           <img className="task-network-icon-image" src="/Img%20-%20Medium%20Priority.svg" alt="" />
