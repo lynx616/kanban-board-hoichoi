@@ -237,7 +237,6 @@ button { cursor: pointer; }
 	.theme-dark .heading-slash { @apply text-white/20; }
 	.theme-dark .view-button { @apply text-white/45 hover:bg-white/5 hover:text-white; }
 	.theme-dark .view-button.active { @apply bg-white/10 text-white; }
-	/* .theme-dark .reference-context { @apply border-white/10; } */
 	.theme-dark .issue-total { @apply text-white/55; }
 	.theme-dark .issue-total-icon-button { @apply bg-[#1A1A1B] text-white/60 shadow-black/20 hover:bg-[#242426] hover:text-white; }
 	.theme-dark .issue-total-notification-dot { @apply ring-[#1A1A1B]; }

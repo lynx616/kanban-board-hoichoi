@@ -37,7 +37,7 @@ export default function TaskCard({ task, onOpen }) {
           e.preventDefault();
           onOpen(task);
         }
-      }}        
+      }}
       className={`task-card group ${isDragging ? "is-dragging" : ""}`}
     >
       <span className="task-id">DEMO-{taskNumber}</span>
@@ -45,11 +45,7 @@ export default function TaskCard({ task, onOpen }) {
         <img className={`task-status-icon status-${task.status}`} src={statusIconPath} alt="" />
         {task.title}
       </h3>
-      {/* <p className="task-description">{task.description || "No description yet."}</p> */}
       <div className="task-tags">
-        <span className="task-network-icon" aria-hidden="true">
-          <img className="task-network-icon-image" src="/Img%20-%20Medium%20Priority.svg" alt="" />
-        </span>
         <span className={`task-chip priority-badge priority-${task.priority}`}>
           <span className="chip-dot" />
           {task.priority}

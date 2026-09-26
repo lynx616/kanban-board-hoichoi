@@ -13,6 +13,7 @@ import {
   Settings2,
   SquarePen,
 } from "lucide-react";
+import { makeInitials } from "../utils/format";
 
 const primaryLinks = [
   { label: "Pulse", icon: Activity },
@@ -116,14 +117,7 @@ export default function Sidebar({
           )}
         </div>
         <span className="user-avatar">
-          {currentUserName
-            ? currentUserName
-                .split(" ")
-                .map((part) => part[0])
-                .join("")
-                .slice(0, 2)
-                .toUpperCase()
-            : "--"}
+          {currentUserName ? makeInitials(currentUserName) : "--"}
         </span>
       </div>
     </aside>
