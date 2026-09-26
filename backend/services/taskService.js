@@ -1,6 +1,26 @@
 const crypto = require("crypto");
+const { z } = require("zod");
 const { columns, priorities, issueTypes, editableFields } = require("../constants/board");
 const { taskExamples } = require("../constants/examples");
+
+const createTaskSchema = z.object({
+  title: z.string().min(1, "A title is required").max(120, "Title must be 120 characters or fewer"),
+  description: z.string().optional(),
+  priority: z.enum(priorities).default("medium"),
+  assignee: z.string().default("Unassigned"),
+  status: z.enum(columns).default("backlog"),
+  type: z.enum(issueTypes).default("task"),
+}).strict();
+
+const updateTaskSchema = z.object({
+  title: z.string().min(1, "Title is required").max(120, "Title must be 120 characters or fewer").optional(),
+  description: z.string().optional(),
+  priority: z.enum(priorities).optional(),
+  assignee: z.string().optional(),
+  status: z.enum(columns).optional(),
+  type: z.enum(issueTypes).optional(),
+  position: z.number().int().min(0).optional(),
+}).strict();
 
 class TaskService {
   constructor() {
@@ -25,17 +45,20 @@ class TaskService {
   }
 
   create(input) {
-    const validationError = this.validateCreate(input);
-    if (validationError) throw new Error(validationError);
+    const parsed = createTaskSchema.safeParse(input);
+    if (!parsed.success) {
+      throw new Error(parsed.error.errors[0].message);
+    }
+    const data = parsed.data;
 
-    const status = columns.includes(input.status) ? input.status : "backlog";
-    const type = issueTypes.includes(input.type) ? input.type : "task";
+    const status = columns.includes(data.status) ? data.status : "backlog";
+    const type = issueTypes.includes(data.type) ? data.type : "task";
     const task = {
       id: crypto.randomUUID(),
-      title: input.title.trim(),
-      description: input.description || "",
-      priority: priorities.includes(input.priority) ? input.priority : "medium",
-      assignee: input.assignee || "Unassigned",
+      title: data.title.trim(),
+      description: data.description || "",
+      priority: priorities.includes(data.priority) ? data.priority : "medium",
+      assignee: data.assignee || "Unassigned",
       status,
       type,
       position: this.countByStatus(status),
@@ -49,23 +72,26 @@ class TaskService {
     const task = this.get(id);
     if (!task) return null;
 
-    const validationError = this.validateUpdate(input);
-    if (validationError) throw new Error(validationError);
+    const parsed = updateTaskSchema.safeParse(input);
+    if (!parsed.success) {
+      throw new Error(parsed.error.errors[0].message);
+    }
+    const data = parsed.data;
 
     const previousStatus = task.status;
-    const nextStatus = input.status !== undefined ? input.status : task.status;
-    const hasPosition = input.position !== undefined;
+    const nextStatus = data.status !== undefined ? data.status : task.status;
+    const hasPosition = data.position !== undefined;
     Object.assign(
       task,
       Object.fromEntries(
-        Object.entries(input).filter(
+        Object.entries(data).filter(
           ([key]) => editableFields.includes(key) && key !== "status" && key !== "position",
         ),
       ),
     );
     task.updatedAt = new Date().toISOString();
     if (nextStatus !== previousStatus || hasPosition) {
-      this.place(task, nextStatus, hasPosition ? input.position : Number.MAX_SAFE_INTEGER);
+      this.place(task, nextStatus, hasPosition ? data.position : Number.MAX_SAFE_INTEGER);
       if (previousStatus !== nextStatus) this.normalize(previousStatus);
     }
     return task;
@@ -103,31 +129,5 @@ class TaskService {
         task.position = index;
       });
   }
-
-  validateCreate(input) {
-    if (!input.title?.trim()) return "A title is required";
-    if (input.title.length > 120) return "Title must be 120 characters or fewer";
-    return null;
-  }
-
-  validateUpdate(input) {
-    if (input.title !== undefined && !input.title.trim())
-      return "Title is required";
-    if (input.title !== undefined && input.title.length > 120)
-      return "Title must be 120 characters or fewer";
-    if (input.priority !== undefined && !priorities.includes(input.priority))
-      return "Invalid priority";
-    if (input.status !== undefined && !columns.includes(input.status))
-      return "Invalid status";
-    if (input.type !== undefined && !issueTypes.includes(input.type))
-      return "Invalid type";
-    if (
-      input.position !== undefined &&
-      (!Number.isInteger(input.position) || input.position < 0)
-    )
-      return "Invalid position";
-    return null;
-  }
 }
-
-module.exports = { TaskService };
+  module.exports = { TaskService };
