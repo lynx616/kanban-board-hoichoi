@@ -149,7 +149,6 @@ export function useBoard() {
           result,
         ]),
       );
-      notify(existingId ? "Task updated" : "Task created");
     } catch (e) {
       if (existingId) setTasks(rollbackTasks(snapshot, [existingId]));
       notify(`Could not save task: ${e.message}`);
@@ -168,7 +167,6 @@ export function useBoard() {
     let committed = { deleted: true };
     try {
       await request(`/api/tasks/${task.id}`, { method: "DELETE" });
-      notify("Task deleted");
       setModal(null);
     } catch (e) {
       committed = task;

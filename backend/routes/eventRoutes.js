@@ -1,54 +1,74 @@
-const { sendJson, readJson } = require("../utils/http");
+import express from "express";
 
-function handleEventRoutes(request, response, eventService, presenceService) {
-  if (request.url === "/api/presence") {
-    if (request.method === "GET") {
-      sendJson(response, 200, presenceService.list());
-      return true;
-    }
+function eventRoutes(eventService) {
+  const router = express.Router();
 
-    if (request.method === "POST" || request.method === "DELETE") {
-      return handlePresenceMutation(request, response, eventService, presenceService);
-    }
-  }
+  // Mounted at /api/events, so this resolves to GET /api/events
+  router.get("/", (req, res) => {
+    res.status(200).set({
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache, no-transform",
+      Connection: "keep-alive",
+      // Stop nginx and other proxies from buffering the stream
+      "X-Accel-Buffering": "no",
+    });
+    res.flushHeaders();
+    res.write("retry: 3000\n\n");
+    res.write(": connected\n\n");
 
-  if (request.url !== "/api/events" || request.method !== "GET") return false;
-  response.writeHead(200, {
-    "Content-Type": "text/event-stream",
-    "Cache-Control": "no-cache",
-    Connection: "keep-alive",
+    eventService.addClient(res);
+
+    // Comment frames keep the connection alive through mobile/wifi proxies
+    // that would otherwise drop an idle stream.
+    const heartbeat = setInterval(() => {
+      res.write(": ping\n\n");
+    }, 25000);
+
+    const cleanup = () => {
+      clearInterval(heartbeat);
+      eventService.removeClient(res);
+    };
+    req.on("close", cleanup);
+    res.on("close", cleanup);
+    res.on("error", cleanup);
   });
-  response.write(": connected\n\n");
-  eventService.addClient(response);
-  return true;
+
+  return router;
 }
 
-async function handlePresenceMutation(request, response, eventService, presenceService) {
-  try {
-    const body = await readJson(request);
-    const id = String(body?.id || "").trim();
-    const name = String(body?.name || "").trim();
+function presenceRouter(presenceService, eventService) {
+  const router = express.Router();
 
-    if (!id) {
-      sendJson(response, 200, presenceService.list());
-      return true;
-    }
+  router.get("/", (req, res) => {
+    res.json(presenceService.list());
+  });
 
-    if (request.method === "POST") {
-      const nextUsers = presenceService.upsert(id, name);
+  router.post("/", async (req, res) => {
+    try {
+      const { id, name } = req.body;
+      if (!id) return res.json(presenceService.list());
+      const nextUsers = presenceService.upsert(String(id).trim(), String(name || "").trim());
       eventService.send("presence-updated", nextUsers);
-      sendJson(response, 200, nextUsers);
-      return true;
+      res.json(nextUsers);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
     }
+  });
 
-    const nextUsers = presenceService.remove(id);
-    eventService.send("presence-updated", nextUsers);
-    sendJson(response, 200, nextUsers);
-    return true;
-  } catch (error) {
-    sendJson(response, 400, { error: error.message });
-    return true;
-  }
+  router.delete("/", async (req, res) => {
+    try {
+      const { id } = req.body;
+      const idStr = String(id || "").trim();
+      if (!idStr) return res.json(presenceService.list());
+      const nextUsers = presenceService.remove(idStr);
+      eventService.send("presence-updated", nextUsers);
+      res.json(nextUsers);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  });
+
+  return router;
 }
 
-module.exports = { handleEventRoutes };
+export { eventRoutes, presenceRouter };
