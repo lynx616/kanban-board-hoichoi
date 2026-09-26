@@ -5,7 +5,9 @@ export class EventService {
 
   addClient(response) {
     this.clients.add(response);
-    response.on("close", () => this.clients.delete(response));
+    const drop = () => this.clients.delete(response);
+    response.on("close", drop);
+    response.on("error", drop);
   }
 
   removeClient(response) {
@@ -13,7 +15,19 @@ export class EventService {
   }
 
   send(event, payload) {
+    if (!this.clients.size) return;
     const message = `event: ${event}\ndata: ${JSON.stringify(payload)}\n\n`;
-    this.clients.forEach((client) => client.write(message));
+    // Iterate a copy: a dead client must never abort delivery to the others.
+    for (const client of [...this.clients]) {
+      try {
+        if (client.writableEnded || client.destroyed) {
+          this.clients.delete(client);
+          continue;
+        }
+        client.write(message);
+      } catch {
+        this.clients.delete(client);
+      }
+    }
   }
 }

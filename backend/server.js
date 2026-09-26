@@ -19,7 +19,7 @@ const presenceService = new PresenceService();
 
 app.use("/api/tasks", taskRoutes(taskService, eventService));
 app.use("/api/board", boardRoutes(taskService));
-app.use("/api/events", eventRoutes(eventService, presenceService));
+app.use("/api/events", eventRoutes(eventService));
 app.use("/api/presence", presenceRouter(presenceService, eventService));
 
 app.use("/api/*", (req, res) => {

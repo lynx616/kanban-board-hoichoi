@@ -1,19 +1,36 @@
 import express from "express";
-import { PresenceService } from "../services/presenceService.js";
-import { EventService } from "../services/eventService.js";
 
-function eventRoutes(eventService, presenceService) {
+function eventRoutes(eventService) {
   const router = express.Router();
 
-  // SSE endpoint for real-time events
-  router.get("/events", (req, res) => {
-    res.setHeader("Content-Type", "text/event-stream");
-    res.setHeader("Cache-Control", "no-cache");
-    res.setHeader("Connection", "keep-alive");
+  // Mounted at /api/events, so this resolves to GET /api/events
+  router.get("/", (req, res) => {
+    res.status(200).set({
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache, no-transform",
+      Connection: "keep-alive",
+      // Stop nginx and other proxies from buffering the stream
+      "X-Accel-Buffering": "no",
+    });
     res.flushHeaders();
+    res.write("retry: 3000\n\n");
     res.write(": connected\n\n");
+
     eventService.addClient(res);
-    req.on("close", () => eventService.removeClient(res));
+
+    // Comment frames keep the connection alive through mobile/wifi proxies
+    // that would otherwise drop an idle stream.
+    const heartbeat = setInterval(() => {
+      res.write(": ping\n\n");
+    }, 25000);
+
+    const cleanup = () => {
+      clearInterval(heartbeat);
+      eventService.removeClient(res);
+    };
+    req.on("close", cleanup);
+    res.on("close", cleanup);
+    res.on("error", cleanup);
   });
 
   return router;
