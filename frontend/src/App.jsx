@@ -118,7 +118,22 @@ function AppContent() {
   }, []);
 
   useEffect(() => {
-    const events = new EventSource(`${API_BASE_URL}/api/events`);
+    let events;
+    let cancelled = false;
+    let reconnectTimeout = null;
+    const reconnect = () => {
+      if (cancelled) return;
+      reconnectTimeout = setTimeout(() => {
+        if (cancelled) return;
+        const newEvents = new EventSource(`${API_BASE_URL}/api/events`);
+        newEvents.onopen = () => {};
+        newEvents.onerror = () => {};
+        newEvents.addEventListener("presence-updated", handlePresence);
+        events?.close();
+        events = newEvents;
+        reconnectTimeout = null;
+      }, 3000);
+    };
     const handlePresence = (event) => {
       try {
         const users = JSON.parse(event.data);
@@ -128,8 +143,13 @@ function AppContent() {
       }
     };
 
+    events = new EventSource(`${API_BASE_URL}/api/events`);
+    events.onopen = () => {};
+    events.onerror = () => {};
     events.addEventListener("presence-updated", handlePresence);
     return () => {
+      cancelled = true;
+      if (reconnectTimeout) clearTimeout(reconnectTimeout);
       events.removeEventListener("presence-updated", handlePresence);
       events.close();
     };

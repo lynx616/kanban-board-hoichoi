@@ -56,7 +56,23 @@ export function useBoard() {
   useEffect(() => {
     let events;
     let cancelled = false;
-    let sawOpen = false;
+    let reconnectTimeout = null;
+    const reconnect = () => {
+      if (cancelled) return;
+      setConnectionState("reconnecting");
+      reconnectTimeout = setTimeout(() => {
+        if (cancelled) return;
+        const newEvents = new EventSource(`${API_BASE_URL}/api/events`);
+        newEvents.onopen = () => setConnectionState("live");
+        newEvents.onerror = () => setConnectionState("reconnecting");
+        newEvents.addEventListener("task-created", reconcileEvent);
+        newEvents.addEventListener("task-updated", reconcileEvent);
+        newEvents.addEventListener("task-deleted", reconcileEvent);
+        events?.close();
+        events = newEvents;
+        reconnectTimeout = null;
+      }, 3000);
+    };
     const reconcileEvent = (event) => {
       const task = JSON.parse(event.data);
       if (pending.current.has(task.id)) {
@@ -65,32 +81,38 @@ export function useBoard() {
       }
       setTasks((current) => sortTasks(applyEvent(current, { type: event.type, task })));
     };
-    request("/api/board")
-      .then((board) => {
-        if (cancelled) return;
+    const fetchBoardData = async () => {
+      try {
+        const board = await request("/api/board");
         setTasks(board);
-        events = new EventSource(`${API_BASE_URL}/api/events`);
-        events.onopen = () => {
-          setConnectionState("live");
-          if (!sawOpen) {
-            sawOpen = true;
-            return;
-          }
-          request("/api/board")
-            .then((fresh) => {
-              if (!cancelled) setTasks((current) => mergeBoard(current, fresh));
-            })
-            .catch(() => {});
-        };
-        events.onerror = () => setConnectionState("reconnecting");
-        events.addEventListener("task-created", reconcileEvent);
-        events.addEventListener("task-updated", reconcileEvent);
-        events.addEventListener("task-deleted", reconcileEvent);
-      })
-      .catch((e) => setError(e.message))
-      .finally(() => setLoading(false));
+        return true;
+      } catch (e) {
+        setError(e.message);
+        return false;
+      }
+    };
+    const setupEventSource = async () => {
+      events = new EventSource(`${API_BASE_URL}/api/events`);
+      events.onopen = () => {
+        setConnectionState("live");
+        fetchBoardData();
+      };
+      events.onerror = () => setConnectionState("reconnecting");
+      events.addEventListener("task-created", reconcileEvent);
+      events.addEventListener("task-updated", reconcileEvent);
+      events.addEventListener("task-deleted", reconcileEvent);
+    };
+    const loadBoard = async () => {
+      const success = await fetchBoardData();
+      if (success) {
+        await setupEventSource();
+      }
+      setLoading(false);
+    };
+    loadBoard();
     return () => {
       cancelled = true;
+      if (reconnectTimeout) clearTimeout(reconnectTimeout);
       events?.close();
     };
   }, []);

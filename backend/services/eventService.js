@@ -8,6 +8,10 @@ export class EventService {
     response.on("close", () => this.clients.delete(response));
   }
 
+  removeClient(response) {
+    this.clients.delete(response);
+  }
+
   send(event, payload) {
     const message = `event: ${event}\ndata: ${JSON.stringify(payload)}\n\n`;
     this.clients.forEach((client) => client.write(message));
