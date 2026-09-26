@@ -3,6 +3,32 @@ import { CSS } from "@dnd-kit/utilities";
 import { Pencil } from "lucide-react";
 import { columns } from "../constants/board";
 
+const PriorityBars = ({ priority }) => {
+  const opacities = {
+    high: [1, 1, 1],
+    medium: [1, 1, 0.3],
+    low: [1, 0.3, 0.3],
+  };
+  const opacityValues = opacities[priority] || opacities.medium;
+
+  return (
+    <svg className="task-network-icon-image" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      {opacityValues.map((opacity, index) => (
+        <rect
+          key={index}
+          x={2.5 + index * 4}
+          y={16 - (4 + index * 4)}
+          width="3"
+          height={4 + index * 4}
+          rx="1"
+          fill="currentColor"
+          style={{ opacity }}
+        />
+      ))}
+    </svg>
+  );
+};
+
 export default function TaskCard({ task, onOpen }) {
   const {
     attributes,
@@ -22,6 +48,7 @@ export default function TaskCard({ task, onOpen }) {
   const taskNumber = task.id.startsWith("task-")
     ? task.id.replace("task-", "").padStart(3, "0")
     : task.id.slice(0, 6).toUpperCase();
+
   return (
     <article
       ref={(node) => {
@@ -46,6 +73,9 @@ export default function TaskCard({ task, onOpen }) {
         {task.title}
       </h3>
       <div className="task-tags">
+        <span className={`task-network-icon priority-${task.priority}`} aria-hidden="true">
+          <PriorityBars priority={task.priority} />
+        </span>
         <span className={`task-chip priority-badge priority-${task.priority}`}>
           <span className="chip-dot" />
           {task.priority}
