@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Trash2, X } from "lucide-react";
 import { columns, issueTypes } from "../constants/board";
 
@@ -21,6 +21,17 @@ export default function TaskModal({ task, onClose, onSave, onDelete }) {
     await onSave({ ...draft, title: draft.title.trim() });
     setSaving(false);
   };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onClose();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
   return (
     <div className="modal-backdrop">
       <form onSubmit={submit} className="task-modal">

@@ -9,7 +9,6 @@ import {
   PanelLeft,
   Plus,
   Search,
-  Settings2,
   SlidersHorizontal,
   Star,
   Sun,

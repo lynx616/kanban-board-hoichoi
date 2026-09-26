@@ -32,6 +32,12 @@ export default function TaskCard({ task, onOpen }) {
       {...attributes}
       {...listeners}
       onClick={() => onOpen(task)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onOpen(task);
+        }
+      }}        
       className={`task-card group ${isDragging ? "is-dragging" : ""}`}
     >
       <span className="task-id">DEMO-{taskNumber}</span>
