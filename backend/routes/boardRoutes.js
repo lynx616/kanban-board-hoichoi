@@ -1,9 +1,13 @@
-const { sendJson } = require("../utils/http");
+import express from "express";
 
-function handleBoardRoutes(request, response, taskService) {
-  if (request.url !== "/api/board" || request.method !== "GET") return false;
-  sendJson(response, 200, taskService.list());
-  return true;
+function boardRoutes(taskService) {
+  const router = express.Router();
+
+  router.get("/", (req, res) => {
+    res.json(taskService.list());
+  });
+
+  return router;
 }
 
-module.exports = { handleBoardRoutes };
+export { boardRoutes };

@@ -1,4 +1,4 @@
-const taskExamples = [
+export const taskExamples = [
   {
     id: "task-1",
     title: "Build Hoichoi Kanban Board",
@@ -32,8 +32,7 @@ const taskExamples = [
   {
     id: "task-4",
     title: "Ship activity timeline",
-    description:
-      "Connect the timeline to the latest task events and add a compact timestamp.",
+    description: "Connect the timeline to the latest task events and add a compact timestamp.",
     priority: "high",
     assignee: "Jordan Lee",
     status: "done",
@@ -61,5 +60,3 @@ const taskExamples = [
     position: 1,
   },
 ];
-
-module.exports = { taskExamples };

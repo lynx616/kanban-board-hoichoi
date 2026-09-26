@@ -1,4 +1,4 @@
-class EventService {
+export class EventService {
   constructor() {
     this.clients = new Set();
   }
@@ -13,5 +13,3 @@ class EventService {
     this.clients.forEach((client) => client.write(message));
   }
 }
-
-module.exports = { EventService };

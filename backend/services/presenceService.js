@@ -1,4 +1,4 @@
-class PresenceService {
+export class PresenceService {
   constructor() {
     this.users = new Map();
   }
@@ -51,5 +51,3 @@ class PresenceService {
     );
   }
 }
-
-module.exports = { PresenceService };

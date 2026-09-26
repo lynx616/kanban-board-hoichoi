@@ -1,7 +1,7 @@
-const crypto = require("crypto");
-const { z } = require("zod");
-const { columns, priorities, issueTypes, editableFields } = require("../constants/board");
-const { taskExamples } = require("../constants/examples");
+import crypto from "crypto";
+import { z } from "zod";
+import { columns, priorities, issueTypes, editableFields } from "../constants/board.js";
+import { taskExamples } from "../constants/examples.js";
 
 const createTaskSchema = z.object({
   title: z.string().min(1, "A title is required").max(120, "Title must be 120 characters or fewer"),
@@ -22,7 +22,7 @@ const updateTaskSchema = z.object({
   position: z.number().int().min(0).optional(),
 }).strict();
 
-class TaskService {
+export class TaskService {
   constructor() {
     this.tasks = new Map(
       taskExamples.map((task) => [
@@ -106,8 +106,7 @@ class TaskService {
   }
 
   countByStatus(status) {
-    return [...this.tasks.values()].filter((task) => task.status === status)
-      .length;
+    return [...this.tasks.values()].filter((task) => task.status === status).length;
   }
 
   place(task, status, position) {
@@ -130,4 +129,3 @@ class TaskService {
       });
   }
 }
-  module.exports = { TaskService };

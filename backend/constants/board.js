@@ -1,7 +1,7 @@
-const columns = ["backlog", "todo", "in-progress", "done"];
-const priorities = ["low", "medium", "high"];
-const issueTypes = ["defect", "task", "story"];
-const editableFields = [
+export const columns = ["backlog", "todo", "in-progress", "done"];
+export const priorities = ["low", "medium", "high"];
+export const issueTypes = ["defect", "task", "story"];
+export const editableFields = [
   "title",
   "description",
   "priority",
@@ -10,5 +10,3 @@ const editableFields = [
   "position",
   "type",
 ];
-
-module.exports = { columns, priorities, issueTypes, editableFields };
